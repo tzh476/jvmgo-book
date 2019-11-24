@@ -34,6 +34,9 @@ func loop(thread *rtda.Thread, bytecode []byte) {
 
 	for {
 		pc := frame.NextPC()
+		fmt.Printf("pc:%2d inst:%T %v\n", pc, frame.OperandStack(), frame.OperandStack())
+		fmt.Printf("pc:%2d inst:%T %v\n", pc, frame.LocalVars(), frame.LocalVars())
+		fmt.Printf("\n")
 		thread.SetPC(pc)
 
 		// decode

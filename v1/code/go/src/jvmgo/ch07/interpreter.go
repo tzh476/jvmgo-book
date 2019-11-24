@@ -27,6 +27,9 @@ func loop(thread *rtda.Thread, logInst bool) {
 	for {
 		frame := thread.CurrentFrame()
 		pc := frame.NextPC()
+		fmt.Printf("pc:%2d inst:%T %v\n", pc, frame.OperandStack(), frame.OperandStack())
+		fmt.Printf("pc:%2d inst:%T %v\n", pc, frame.LocalVars(), frame.LocalVars())
+		fmt.Printf("\n")
 		thread.SetPC(pc)
 
 		// decode
@@ -39,7 +42,7 @@ func loop(thread *rtda.Thread, logInst bool) {
 		if logInst {
 			logInstruction(frame, inst)
 		}
-
+		fmt.Printf("pc:%2d inst:%T %v\n", pc, inst, inst)
 		// execute
 		inst.Execute(frame)
 		if thread.IsStackEmpty() {
